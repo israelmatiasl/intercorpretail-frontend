@@ -1,0 +1,62 @@
+<div class="row mt-5">
+  <div class="col-12 col-lg-8">
+
+    <div class="row">
+      <div class="col-6">
+        <h4 class="text-secondary">Listado de Clientes</h4>
+      </div>
+      <div class="col-6">
+        <button class="btn btn-primary float-right" (click)="createCustomer()">Nuevo Cliente</button>
+      </div>
+    </div>
+
+    <div class="row mt-3">
+      <div class="col-12">
+          <div class="card">
+              <div class="card-body">
+                <div class="table-responsive mt-4" *ngIf="customers$ | async as customers">
+                  <table class="table table-hover table-nowrap">
+                    <thead class="table-dark">
+                      <tr>
+                        <th scope="col">#</th>
+                        <th scope="col">Name</th>
+                        <th scope="col">Surname</th>
+                        <th scope="col">Age</th>
+                        <th scope="col">Birthdate</th>
+                        <th scope="col">Actions</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr *ngFor="let customer of customers; let idx = index">
+                        <th>{{ idx+1 }}</th>
+                        <td>{{ customer.name }}</td>
+                        <td>{{ customer.surname }}</td>
+                        <td>{{ customer.age }}</td>
+                        <td>{{ customer.birthdate }}</td>
+                        <td>
+                          <button type="button" class="btn btn-info btn-sm" (click)="selectCustomer(customer)">
+                            Ver
+                          </button>
+                          <button type="button" class="btn btn-warning btn-sm ml-2" (click)="updateCustomer(customer)">
+                            Edit
+                          </button>
+                          <button type="button" class="btn btn-danger btn-sm ml-2" (click)="deleteCustomer(customer.id)">
+                            Delete
+                          </button>
+                        </td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
+                  
+              </div>
+          </div>
+      </div>
+    </div>
+
+  </div>
+
+  <div class="col-12 col-lg-4">
+    <app-customers-detail [variables]="variables" [customer]="customer"></app-customers-detail>
+  </div>
+</div>
